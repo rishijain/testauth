@@ -19,7 +19,7 @@ module V1
       
       def _upsert
         find_or_create
-        @site.update_attributes(args)
+        @site.update_attributes!(args)
         @site
       end
       
@@ -28,22 +28,12 @@ module V1
       end
 
       def validate_args
-        check_if_args_contain_site_key
-        check_if_args_contain_regions_key
         check_if_args_contrain_valid_regions_details
-      end
-
-      def check_if_args_contain_site_key
-        raise MissingAttributesError, :site_key unless args[:site_key]
-      end
-
-      def check_if_args_contain_regions_key
-        raise MissingAttributesError, :regions unless args[:regions]
       end
 
       def check_if_args_contrain_valid_regions_details
         regions = Settings.regions.keys
-        flag = args[:regions].keys.any?{|a| regions.include?(a.to_sym)}
+        flag = regions.any?{|a| a.to_sym == args[:region].to_sym}
         raise MissingAttributesError, "valid_regions should be #{regions}" unless flag
       end
     end

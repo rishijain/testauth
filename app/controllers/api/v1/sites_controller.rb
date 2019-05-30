@@ -1,5 +1,6 @@
 class Api::V1::SitesController < ApplicationController
-
+  before_action :load_sites, only: [:index]
+  
   def create
     _upsert
   end
@@ -9,7 +10,7 @@ class Api::V1::SitesController < ApplicationController
   end
 
   def index
-    render json: Site.all
+    render json: ::V1::SiteSerializer.new(Site.all).serializable_hash
   end
 
   private
@@ -18,13 +19,15 @@ class Api::V1::SitesController < ApplicationController
     site, errors = ::V1::Sites::UpsertSite.new(site_params).exec
     render json: { 
                   errors: Array(errors),
-                  data: site,
                   status: site ? 200 : 500
-                 }
+                 }.merge(V1::SiteSerializer.new(site).serializable_hash)
   end
 
   def site_params
-    params.require(:site).permit(:site_key, :name, regions: {})
+    params.require(:site).permit(:site_key, :name, :region)
   end
 
+  def load_sites
+    @sites = Site.all
+  end
 end
