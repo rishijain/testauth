@@ -1,6 +1,8 @@
+Config.load_and_set_settings(ENV['CONSOLE_SETTINGS_PATH']) if Rails.env == 'production'
 Config.setup do |config|
   # Name of the constant exposing loaded settings
   config.const_name = 'Settings'
+
 
   # Ability to remove elements of the array set in earlier loaded settings file. For example value: '--'.
   #

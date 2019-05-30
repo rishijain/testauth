@@ -19,6 +19,7 @@ class User
   validate :validate_regions
   validate :validate_ref_user_presence
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  
   private
 
   def validate_regions
