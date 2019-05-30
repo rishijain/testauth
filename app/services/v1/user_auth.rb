@@ -16,7 +16,7 @@ class V1::UserAuth
   end
 
   def message_for_correct_auth
-    { message: 'Authenticated', status: true }
+    { message: 'Authenticated', status: true}
   end
 
   def message_for_incorrect_auth

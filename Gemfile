@@ -21,6 +21,7 @@ gem 'puma', '~> 3.11'
 # gem 'rack-cors'
 
 group :development, :test do
+  gem 'pry', '~> 0.12.2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -43,3 +44,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mongoid', '~> 6.0'
 gem 'bson_ext', '1.5.1'
 gem 'bcrypt', '3.1.10'
+gem 'config', '1.7.1'
